@@ -1,8 +1,15 @@
 import { sidebar } from "vuepress-theme-hope";
 
-export const enSidebar = sidebar({
+export const jpSidebar = sidebar({
   "/": [
     "",
+    {
+      text:"ゴミ",
+      icon: "laptop-code",
+      prefix: "rubbish/",
+      link: "rubbish/",
+      children: "structure",
+    },
     {
       text: "Demo",
       icon: "laptop-code",

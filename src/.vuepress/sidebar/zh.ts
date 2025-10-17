@@ -1,9 +1,15 @@
-import { sidebar } from "vuepress-theme-hope";
+import {sidebar} from "vuepress-theme-hope";
 
 export const zhSidebar = sidebar({
   "/zh/": [
     "",
-    "portfolio",
+    {
+      text: "垃圾",
+      icon: "laptop-code",
+      prefix: "rubbish/",
+      link: "rubbish/",
+      children: "structure",
+    },
     {
       text: "案例",
       icon: "laptop-code",

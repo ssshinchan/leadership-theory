@@ -1,14 +1,13 @@
-import { hopeTheme } from "vuepress-theme-hope";
+import {hopeTheme} from "vuepress-theme-hope";
 
-import { enNavbar, zhNavbar } from "./navbar/index.js";
-import { enSidebar, zhSidebar } from "./sidebar/index.js";
+import {enNavbar, zhNavbar} from "./navbar/index.js";
+import {jpSidebar, zhSidebar} from "./sidebar/index.js";
 
 export default hopeTheme({
-  hostname: "https://vuepress-theme-hope-docs-demo.netlify.app",
+  hostname: "https://group64.compile.ac.cn",
 
   author: {
-    name: "Mr.Hope",
-    url: "https://mister-hope.com",
+    name: "Group 64",
   },
 
   logo: "https://theme-hope-assets.vuejs.press/logo.svg",
@@ -16,14 +15,14 @@ export default hopeTheme({
   repo: "ssshinchan/leadership-theory",
 
   docsDir: "src",
-
+  darkmode: "disable",
   locales: {
     "/": {
       // navbar
       navbar: enNavbar,
 
       // sidebar
-      sidebar: enSidebar,
+      sidebar: jpSidebar,
 
       footer: "Default footer",
 
@@ -86,11 +85,11 @@ export default hopeTheme({
     stylize: [
       {
         matcher: "Recommended",
-        replacer: ({ tag }) => {
+        replacer: ({tag}) => {
           if (tag === "em")
             return {
               tag: "Badge",
-              attrs: { type: "tip" },
+              attrs: {type: "tip"},
               content: "Recommended",
             };
         },
@@ -143,10 +142,10 @@ export default hopeTheme({
     // You MUST generate and use your own comment service in production.
     comment: {
       provider: "Giscus",
-      repo: "vuepress-theme-hope/giscus-discussions",
-      repoId: "R_kgDOG_Pt2A",
+      repo: "ssshinchan/leadership-theory",
+      repoId: "R_kgDOP-_zEg",
       category: "Announcements",
-      categoryId: "DIC_kwDOG_Pt2M4COD69",
+      categoryId: "DIC_kwDOP-_zEs4CwvaA",
     },
 
     components: {
