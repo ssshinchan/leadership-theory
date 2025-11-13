@@ -4,6 +4,6 @@ icon: comments
 ---
 
 <RubbishOpenAIChat
-    rubbishLabel="垃圾名"
-    cityLabel="城市名"
+    rubbishLabel="Garbage name"
+    cityLabel="City name"
 />

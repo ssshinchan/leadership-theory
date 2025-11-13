@@ -1,2 +1,2 @@
 export * from "./jp.js";
-export * from "./zh.js";
+export * from "./en.js";

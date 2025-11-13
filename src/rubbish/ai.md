@@ -1,6 +1,6 @@
 ---
 title: AIに分別を聞く
-icon: comments
+icon: robot
 ---
 
 <RubbishOpenAIChat

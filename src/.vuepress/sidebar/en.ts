@@ -1,10 +1,10 @@
-import { sidebar } from "vuepress-theme-hope";
+import {sidebar} from "vuepress-theme-hope";
 
-export const jpSidebar = sidebar({
-  "/": [
+export const enSidebar = sidebar({
+  "/en/": [
     "",
     {
-      text:"ゴミ",
+      text: "Rubbish",
       icon: "laptop-code",
       prefix: "rubbish/",
       link: "rubbish/",

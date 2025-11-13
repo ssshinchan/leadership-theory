@@ -1,7 +1,7 @@
 import {hopeTheme} from "vuepress-theme-hope";
 
-import {enNavbar, zhNavbar} from "./navbar/index.js";
-import {jpSidebar, zhSidebar} from "./sidebar/index.js";
+import {enNavbar, jpNavbar} from "./navbar/index.js";
+import {jpSidebar, enSidebar} from "./sidebar/index.js";
 
 export default hopeTheme({
   hostname: "https://group64.compile.ac.cn",
@@ -10,7 +10,7 @@ export default hopeTheme({
     name: "Group 64",
   },
 
-  logo: "https://theme-hope-assets.vuejs.press/logo.svg",
+  logo: "/assets/image/site-logo.png",
 
   repo: "ssshinchan/leadership-theory",
 
@@ -19,7 +19,7 @@ export default hopeTheme({
   locales: {
     "/": {
       // navbar
-      navbar: enNavbar,
+      navbar: jpNavbar,
 
       // sidebar
       sidebar: jpSidebar,
@@ -34,16 +34,16 @@ export default hopeTheme({
     },
 
     /**
-     * Chinese locale config
+     * English locale config
      */
-    "/zh/": {
+    "/en/": {
       // navbar
-      navbar: zhNavbar,
+      navbar: enNavbar,
 
       // sidebar
-      sidebar: zhSidebar,
+      sidebar: enSidebar,
 
-      footer: "默认页脚",
+      footer: "Default footer",
 
       displayFooter: true,
 
