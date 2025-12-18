@@ -10,13 +10,10 @@ bgImageStyle:
 heroText: 京都ゴミ先生
 tagline: 京都の留学生向けのごみ分別ウェブサイト
 actions:
-  - text: 问卷调查
-    icon: lightbulb
-    link: ./demo/
+  - text: スタート
+    icon: play
+    link: /rubbish/
     type: primary
-
-  - text: 文档
-    link: ./guide/
 
 highlights:
   - header: グループメンバー
