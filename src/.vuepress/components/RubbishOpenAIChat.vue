@@ -12,9 +12,9 @@
         />
       </div>
       <div class="input-group">
-        <label class="input-label" v-text="cityLabel"></label>
+        <label class="input-label" v-text="regionLabel"></label>
         <input
-            v-model="cityInput"
+            v-model="regionInput"
             class="input"
             :disabled="loading"
         />
@@ -49,7 +49,7 @@ import MarkdownIt from 'markdown-it';
 
 const props = defineProps<{
   rubbishLabel?: string,
-  cityLabel?: string,
+  regionLabel?: string,
 }>();
 
 const md = new MarkdownIt({
@@ -60,7 +60,7 @@ const md = new MarkdownIt({
 });
 
 const rubbishInput = ref('');
-const cityInput = ref('');
+const regionInput = ref('');
 const response = ref('');
 const error = ref('');
 const loading = ref(false);
@@ -89,7 +89,7 @@ const submitQuery = async () => {
 
 # 输入变量
 * **语言:** ${language}
-* **城市:** ${cityInput.value}
+* **城市:** ${regionInput.value}
 * **垃圾名:** ${rubbishInput.value}
 
 # 输出要求

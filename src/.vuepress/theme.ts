@@ -113,7 +113,7 @@ export default hopeTheme({
     // chartjs: true,
 
     // install echarts before enabling it
-    // echarts: true,
+    echarts: true,
 
     // install flowchart.ts before enabling it
     // flowchart: true,

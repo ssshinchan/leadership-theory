@@ -5,5 +5,5 @@ icon: comments
 
 <RubbishOpenAIChat
     rubbishLabel="Garbage name"
-    cityLabel="City name"
+    regionLabel="Region"
 />
