@@ -27,15 +27,7 @@ export default hopeTheme({
       footer: "Default footer",
 
       displayFooter: true,
-
-      metaLocales: {
-        editLink: "Edit this page on GitHub",
-      },
     },
-
-    /**
-     * English locale config
-     */
     "/en/": {
       // navbar
       navbar: enNavbar,
@@ -46,11 +38,6 @@ export default hopeTheme({
       footer: "Default footer",
 
       displayFooter: true,
-
-      // page meta
-      metaLocales: {
-        editLink: "在 GitHub 上编辑此页",
-      },
     },
   },
 

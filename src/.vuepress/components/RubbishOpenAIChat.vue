@@ -24,16 +24,16 @@
           :disabled="loading || !rubbishInput.trim()"
           class="submit-button"
       >
-        {{ loading ? '処理中...' : '発送' }}
+        {{ loading ? props.loadingText : props.submitButtonText }}
       </button>
     </div>
 
     <div v-if="error" class="error-message">
-      <strong>Error:</strong> {{ error }}
+      <strong>{{ props.errorLabel }}</strong> {{ error }}
     </div>
 
     <div v-if="response" class="response-block">
-      <h3>結果:</h3>
+      <h3>{{ props.resultTitle }}</h3>
       <div class="response-content markdown-body" v-html="renderedResponse"></div>
     </div>
 
@@ -47,10 +47,21 @@
 import {ref, computed} from 'vue';
 import MarkdownIt from 'markdown-it';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   rubbishLabel?: string,
   regionLabel?: string,
-}>();
+  submitButtonText?: string,
+  loadingText?: string,
+  errorLabel?: string,
+  resultTitle?: string,
+}>(), {
+  rubbishLabel: 'ゴミの名前',
+  regionLabel: '地域',
+  submitButtonText: 'AIに聞く',
+  loadingText: '処理中...',
+  errorLabel: 'エラー:',
+  resultTitle: '結果:',
+});
 
 const md = new MarkdownIt({
   html: true,
@@ -78,7 +89,7 @@ const submitQuery = async () => {
   response.value = '';
 
   try {
-    const language = window.location.href.indexOf("/zh/") >= 0 ? "中文" : "日文";
+    const language = window.location.href.indexOf("/en/") >= 0 ? "英文" : "日文";
     const apiKey = 'sk-tlmIQC96RAuvzK6MOLRolEwthqASHWauUAAIaFe3MovKlvvJ';
     const prompt = `
 # 角色

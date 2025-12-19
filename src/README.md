@@ -26,7 +26,7 @@ highlights:
         details: PPTを作成する & 発表
 
       - title: M25W7329 李宜航
-        details: ウェブサイトを開発する & アンケート調査を実施する
+        details: ウェブサイトを開発する & アンケート調査を実施する & データ分析
 
       - title: M25W7345 曹洺嘉
         details: データ収集
@@ -35,10 +35,10 @@ highlights:
         details: データ収集
 
       - title: M25W7374 羅嘉煒
-        details: データ収集と
+        details: データ収集
 
       - title: M25W7497 瀋普銘
-        details: ウェブサイトを開発する & データ収集
+        details: ウェブサイトを開発する & データ可視化 & 英語翻訳
 
       - title: M25W0222 宋首正
         details: データ収集
