@@ -24,8 +24,6 @@ export default hopeTheme({
       // sidebar
       sidebar: jpSidebar,
 
-      footer: "Default footer",
-
       displayFooter: true,
     },
     "/en/": {
@@ -34,8 +32,6 @@ export default hopeTheme({
 
       // sidebar
       sidebar: enSidebar,
-
-      footer: "Default footer",
 
       displayFooter: true,
     },

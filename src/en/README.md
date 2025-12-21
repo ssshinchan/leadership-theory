@@ -1,51 +1,48 @@
 ---
 home: true
 icon: house
-title: ホーム
+title: Home
 heroImage: /assets/image/site-logo.png
 bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
 bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
 bgImageStyle:
   background-attachment: fixed
-heroText: 京都ゴミ先生
-tagline: 京都の留学生向けのごみ分別ウェブサイト
+heroText: Kyoto Trash Teacher
+tagline: A waste separation website for international students in Kyoto
 actions:
-  - text: 问卷调查
-    icon: lightbulb
-    link: ./demo/
+  - text: Start Now
+    icon: play
+    link: /rubbish/
     type: primary
 
-  - text: 文档
-    link: ./guide/
-
 highlights:
-  - header: グループメンバー
-    description: 役割りと機能
+  - header: Group Members
+    description: Roles and responsibilities
     image: /assets/image/blog.svg
     bgImage: https://theme-hope-assets.vuejs.press/bg/4-light.svg
     bgImageDark: https://theme-hope-assets.vuejs.press/bg/4-dark.svg
     highlights:
       - title: M25W7315 張子涵
-        details: PPTを作成する & 発表
+        details: Create PPT & Present
 
       - title: M25W7329 李宜航
-        details: ウェブサイトを開発する & アンケート調査を実施する
+        details: Develop website & Conduct survey & Data analysis
 
       - title: M25W7345 曹洺嘉
-        details: データ収集
+        details: Data collection
 
       - title: M25W7359 許睿鴻
-        details: データ収集
+        details: Data collection
 
       - title: M25W7374 羅嘉煒
-        details: データ収集と
+        details: Data collection
 
       - title: M25W7497 瀋普銘
-        details: ウェブサイトを開発する & データ収集
+        details: Develop website & Data visualization & English translation
 
       - title: M25W0222 宋首正
-        details: データ収集
+        details: Data collection
 
 copyright: false
-footer: 全著作権所有 © 2025-2025 グループ64
+footer: All rights reserved © 2025-2025 Group 64
 ---

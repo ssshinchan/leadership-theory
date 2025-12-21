@@ -12,12 +12,12 @@ export default defineUserConfig({
     "/": {
       lang: "ja-JP",
       title: "京都ゴミ先生",
-      description: "---------京都ゴミ先生",
+      description: "京都の留学生向けのごみ分別ウェブサイト",
     },
     "/en/": {
       lang: "en-US",
-      title: "文档演示",
-      description: "vuepress-theme-hope 的文档演示",
+      title: "Kyoto Trash Teacher",
+      description: "A waste separation website for international students in Kyoto",
     },
   },
 

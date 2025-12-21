@@ -1,5 +1,6 @@
 ---
-title: 垃圾
+title: Rubbish
+icon: recycle
 index: false
 ---
 

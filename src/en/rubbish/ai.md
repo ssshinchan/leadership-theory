@@ -1,9 +1,13 @@
 ---
-title: 向AI询问垃圾分类
-icon: comments
+title: Ask AI for sorting
+icon: robot
 ---
 
 <RubbishOpenAIChat
-    rubbishLabel="Garbage name"
+    rubbishLabel="Name of the rubbish"
     regionLabel="Region"
+    submitButtonText="Ask AI"
+    loadingText="Processing..."
+    errorLabel="Error:"
+    resultTitle="Result:"
 />
