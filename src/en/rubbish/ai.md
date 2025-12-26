@@ -4,10 +4,16 @@ icon: robot
 ---
 
 <RubbishOpenAIChat
-    rubbishLabel="Name of the rubbish"
-    regionLabel="Region"
-    submitButtonText="Ask AI"
-    loadingText="Processing..."
-    errorLabel="Error:"
-    resultTitle="Result:"
+    rubbishLabel = 'Rubbish Name'
+    regionLabel = 'Region'
+    submitButtonText = 'Ask AI'
+    loadingText = 'Processing...'
+    errorLabel = 'Error:'
+    resultTitle = 'Result:'
+    textModeLabel = 'Text Input'
+    imageModeLabel = 'Image Upload'
+    uploadButtonText = 'Select Image'
+    cameraButtonText = 'Take Photo'
+    captureButtonText = 'Capture'
+    closeCameraButtonText = 'Close'
 />

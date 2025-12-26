@@ -2,15 +2,30 @@
   <div class="openai-chat-container">
     <!--    <h2>OpenAI Chat</h2>-->
 
-    <div class="input-section">
-      <div class="input-group">
-        <label class="input-label" v-text="rubbishLabel"></label>
-        <input
-            v-model="rubbishInput"
-            class="input"
-            :disabled="loading"
+    <!-- 模式切换 -->
+    <div class="mode-selector">
+      <label class="mode-option">
+        <input 
+          type="radio" 
+          v-model="inputMode" 
+          value="text"
+          :disabled="loading"
         />
-      </div>
+        <span>{{ props.textModeLabel }}</span>
+      </label>
+      <label class="mode-option">
+        <input 
+          type="radio" 
+          v-model="inputMode" 
+          value="image"
+          :disabled="loading"
+        />
+        <span>{{ props.imageModeLabel }}</span>
+      </label>
+    </div>
+
+    <!-- 文本输入模式 -->
+    <div v-if="inputMode === 'text'" class="input-section">
       <div class="input-group">
         <label class="input-label" v-text="regionLabel"></label>
         <input
@@ -19,9 +34,80 @@
             :disabled="loading"
         />
       </div>
+      <div class="input-group">
+        <label class="input-label" v-text="rubbishLabel"></label>
+        <input
+            v-model="rubbishInput"
+            class="input"
+            :disabled="loading"
+        />
+      </div>
       <button
           @click="submitQuery"
           :disabled="loading || !rubbishInput.trim()"
+          class="submit-button"
+      >
+        {{ loading ? props.loadingText : props.submitButtonText }}
+      </button>
+    </div>
+
+    <!-- 图片输入模式 -->
+    <div v-else class="input-section">
+      <div class="input-group">
+        <label class="input-label" v-text="regionLabel"></label>
+        <input
+            v-model="regionInput"
+            class="input"
+            :disabled="loading"
+        />
+      </div>
+      
+      <div class="image-upload-section">
+        <div class="upload-options">
+          <label class="upload-button">
+            <input 
+              type="file" 
+              accept="image/*" 
+              @change="handleFileUpload"
+              :disabled="loading"
+              ref="fileInput"
+              style="display: none;"
+            />
+            <span>📁 {{ props.uploadButtonText }}</span>
+          </label>
+          
+          <button 
+            @click="openCamera" 
+            :disabled="loading"
+            class="camera-button"
+          >
+            📷 {{ props.cameraButtonText }}
+          </button>
+        </div>
+
+        <!-- 摄像头预览 -->
+        <div v-if="showCamera" class="camera-preview">
+          <video ref="videoElement" autoplay playsinline></video>
+          <div class="camera-controls">
+            <button @click="capturePhoto" class="capture-button">
+              {{ props.captureButtonText }}
+            </button>
+            <button @click="closeCamera" class="close-camera-button">
+              {{ props.closeCameraButtonText }}
+            </button>
+          </div>
+        </div>
+
+        <!-- 图片预览 -->
+        <div v-if="imagePreview" class="image-preview">
+          <img :src="imagePreview" alt="Preview" />
+          <button @click="clearImage" class="clear-button">✕</button>
+        </div>
+      </div>
+
+      <button
+          @click="submitQuery"
+          :disabled="loading || !imageBase64"
           class="submit-button"
       >
         {{ loading ? props.loadingText : props.submitButtonText }}
@@ -44,7 +130,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref, computed} from 'vue';
+import {ref, computed, onUnmounted} from 'vue';
 import MarkdownIt from 'markdown-it';
 
 const props = withDefaults(defineProps<{
@@ -54,6 +140,12 @@ const props = withDefaults(defineProps<{
   loadingText?: string,
   errorLabel?: string,
   resultTitle?: string,
+  textModeLabel?: string,
+  imageModeLabel?: string,
+  uploadButtonText?: string,
+  cameraButtonText?: string,
+  captureButtonText?: string,
+  closeCameraButtonText?: string,
 }>(), {
   rubbishLabel: 'ゴミの名前',
   regionLabel: '地域',
@@ -61,6 +153,12 @@ const props = withDefaults(defineProps<{
   loadingText: '処理中...',
   errorLabel: 'エラー:',
   resultTitle: '結果:',
+  textModeLabel: 'テキスト入力',
+  imageModeLabel: '画像アップロード',
+  uploadButtonText: '画像を選択',
+  cameraButtonText: 'カメラで撮影',
+  captureButtonText: '撮影',
+  closeCameraButtonText: '閉じる',
 });
 
 const md = new MarkdownIt({
@@ -70,8 +168,22 @@ const md = new MarkdownIt({
   breaks: true,
 });
 
+// 模式选择
+const inputMode = ref<'text' | 'image'>('text');
+
+// 文本模式变量
 const rubbishInput = ref('');
 const regionInput = ref('');
+
+// 图片模式变量
+const imageBase64 = ref('');
+const imagePreview = ref('');
+const showCamera = ref(false);
+const videoElement = ref<HTMLVideoElement | null>(null);
+const mediaStream = ref<MediaStream | null>(null);
+const fileInput = ref<HTMLInputElement | null>(null);
+
+// 通用变量
 const response = ref('');
 const error = ref('');
 const loading = ref(false);
@@ -81,8 +193,88 @@ const renderedResponse = computed(() => {
   return md.render(response.value);
 });
 
+// 文件上传处理
+const handleFileUpload = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  const file = target.files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const result = e.target?.result as string;
+      imageBase64.value = result;
+      imagePreview.value = result;
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
+// 打开摄像头
+const openCamera = async () => {
+  try {
+    showCamera.value = true;
+    const stream = await navigator.mediaDevices.getUserMedia({ 
+      video: { facingMode: 'environment' }
+    });
+    mediaStream.value = stream;
+    
+    // 等待 DOM 更新
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
+    if (videoElement.value) {
+      videoElement.value.srcObject = stream;
+    }
+  } catch (err) {
+    error.value = 'カメラへのアクセスに失敗しました';
+    showCamera.value = false;
+  }
+};
+
+// 拍照
+const capturePhoto = () => {
+  if (!videoElement.value) return;
+  
+  const canvas = document.createElement('canvas');
+  canvas.width = videoElement.value.videoWidth;
+  canvas.height = videoElement.value.videoHeight;
+  const ctx = canvas.getContext('2d');
+  
+  if (ctx) {
+    ctx.drawImage(videoElement.value, 0, 0);
+    imageBase64.value = canvas.toDataURL('image/jpeg');
+    imagePreview.value = imageBase64.value;
+  }
+  
+  closeCamera();
+};
+
+// 关闭摄像头
+const closeCamera = () => {
+  if (mediaStream.value) {
+    mediaStream.value.getTracks().forEach(track => track.stop());
+    mediaStream.value = null;
+  }
+  showCamera.value = false;
+};
+
+// 清除图片
+const clearImage = () => {
+  imageBase64.value = '';
+  imagePreview.value = '';
+  if (fileInput.value) {
+    fileInput.value.value = '';
+  }
+};
+
+// 组件卸载时清理
+onUnmounted(() => {
+  closeCamera();
+});
+
+// 统一提交函数（支持文本和图片模式）
 const submitQuery = async () => {
-  if (!rubbishInput.value.trim()) return;
+  // 验证输入
+  if (inputMode.value === 'text' && !rubbishInput.value.trim()) return;
+  if (inputMode.value === 'image' && !imageBase64.value) return;
 
   loading.value = true;
   error.value = '';
@@ -91,12 +283,17 @@ const submitQuery = async () => {
   try {
     const language = window.location.href.indexOf("/en/") >= 0 ? "英文" : "日文";
     const apiKey = 'sk-tlmIQC96RAuvzK6MOLRolEwthqASHWauUAAIaFe3MovKlvvJ';
-    const prompt = `
+    
+    // 根据模式构建不同的prompt和消息内容
+    let messageContent;
+    
+    if (inputMode.value === 'text') {
+      const prompt = `
 # 角色
 你是一位精通日本全国各市、区、町、村垃圾分类规则的专家级AI助手。
 
 # 任务
-我的任务是根据用户提供的“城市”、“垃圾名称”和“语言”，提供清晰、准确、详细的垃圾分类指示。日本的规则因地区而异，你必须严格依据我指定的城市来回答。
+我的任务是根据用户提供的"城市"、"垃圾名称"和"语言"，提供清晰、准确、详细的垃圾分类指示。日本的规则因地区而异，你必须严格依据我指定的城市来回答。
 
 # 输入变量
 * **语言:** ${language}
@@ -108,8 +305,43 @@ const submitQuery = async () => {
 1.  **垃圾类别:** 首先，最直接地告诉我它属于哪一类垃圾（例如：可燃ごみ、資源ごみ、小型金属類、スプレー缶 等）。
 2.  **处理方法:** 详细说明丢弃前需要如何处理（例如：需要冲洗干净、需要拆分瓶盖和标签、需要用完内容物、需要钻孔、需要装入指定的垃圾袋等）。
 3.  **回收日期:** 说明该类别垃圾的通常回收日（例如：每周二、每月的第一个和第三个周四）。
-4.  **注意事项:** 提供任何当地的特殊规定或安全提示（例如：尖锐物品需要用报纸包裹并写上“キケン”或“危险”字样、电池需要取下等）。
+4.  **注意事项:** 提供任何当地的特殊规定或安全提示（例如：尖锐物品需要用报纸包裹并写上"キケン"或"危险"字样、电池需要取下等）。
 5.  **信息来源 (可选):** 如果可能，请提供查询到的信息来源，例如该城市的官方网站垃圾分类指南链接，以供我核实。。`;
+      messageContent = prompt;
+    } else {
+      const prompt = `
+# 角色
+你是一位精通日本全国各市、区、町、村垃圾分类规则的专家级AI助手。
+
+# 任务
+我的任务是根据用户提供的"城市"和"垃圾图片"以及"语言"，识别图片中的垃圾，并提供清晰、准确、详细的垃圾分类指示。日本的规则因地区而异，你必须严格依据我指定的城市来回答。
+
+# 输入变量
+* **语言:** ${language}
+* **城市:** ${regionInput.value}
+* **垃圾图片:** (用户上传的图片)
+
+# 输出要求
+请根据以上信息，提供一个包含以下所有要点的完整回答：
+0.  **垃圾识别:** 首先识别图片中的物品是什么。
+1.  **垃圾类别:** 告诉我它属于哪一类垃圾（例如：可燃ごみ、資源ごみ、小型金属類、スプレー缶 等）。
+2.  **处理方法:** 详细说明丢弃前需要如何处理（例如：需要冲洗干净、需要拆分瓶盖和标签、需要用完内容物、需要钻孔、需要装入指定的垃圾袋等）。
+3.  **回收日期:** 说明该类别垃圾的通常回收日（例如：每周二、每月的第一个和第三个周四）。
+4.  **注意事项:** 提供任何当地的特殊规定或安全提示（例如：尖锐物品需要用报纸包裹并写上"キケン"或"危险"字样、电池需要取下等）。
+5.  **信息来源 (可选):** 如果可能，请提供查询到的信息来源，例如该城市的官方网站垃圾分类指南链接，以供我核实。`;
+      messageContent = [
+        {
+          type: 'text',
+          text: prompt,
+        },
+        {
+          type: 'image_url',
+          image_url: {
+            url: imageBase64.value,
+          },
+        },
+      ];
+    }
 
     const res = await fetch('https://api.bltcy.ai/v1/chat/completions', {
       method: 'POST',
@@ -123,7 +355,7 @@ const submitQuery = async () => {
         messages: [
           {
             role: 'user',
-            content: prompt,
+            content: messageContent,
           },
         ],
         temperature: 0.7,
@@ -227,6 +459,36 @@ const submitQuery = async () => {
   color: #333;
 }
 
+/* 模式选择器 */
+.mode-selector {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+}
+
+.mode-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.mode-option input[type="radio"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.mode-option:hover {
+  color: #409eff;
+}
+
 .input-section {
   margin-bottom: 1.5rem;
 }
@@ -264,6 +526,134 @@ const submitQuery = async () => {
 .input:disabled {
   background-color: #f5f5f5;
   cursor: not-allowed;
+}
+
+/* 图片上传部分 */
+.image-upload-section {
+  margin: 1rem 0;
+}
+
+.upload-options {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.upload-button,
+.camera-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #67c23a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.upload-button:hover:not(:disabled),
+.camera-button:hover:not(:disabled) {
+  background-color: #85ce61;
+}
+
+.upload-button:disabled,
+.camera-button:disabled {
+  background-color: #a0cfff;
+  cursor: not-allowed;
+}
+
+/* 摄像头预览 */
+.camera-preview {
+  margin: 1rem 0;
+  border: 2px solid #409eff;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.camera-preview video {
+  width: 100%;
+  display: block;
+  max-height: 400px;
+  object-fit: contain;
+}
+
+.camera-controls {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #2c3e50;
+  justify-content: center;
+}
+
+.capture-button,
+.close-camera-button {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.capture-button {
+  background-color: #409eff;
+  color: white;
+}
+
+.capture-button:hover {
+  background-color: #66b1ff;
+}
+
+.close-camera-button {
+  background-color: #f56c6c;
+  color: white;
+}
+
+.close-camera-button:hover {
+  background-color: #f78989;
+}
+
+/* 图片预览 */
+.image-preview {
+  position: relative;
+  margin: 1rem 0;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.image-preview img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  display: block;
+}
+
+.clear-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(245, 108, 108, 0.9);
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.clear-button:hover {
+  background-color: rgba(245, 108, 108, 1);
 }
 
 .submit-button {
@@ -479,6 +869,18 @@ html.dark .response-block h3 {
   color: #e0e0e0;
 }
 
+html.dark .mode-selector {
+  background-color: #2a2a2a;
+}
+
+html.dark .mode-option {
+  color: #e0e0e0;
+}
+
+html.dark .mode-option:hover {
+  color: #66b1ff;
+}
+
 html.dark .input {
   background-color: #2a2a2a;
   border-color: #3a3a3a;
@@ -491,6 +893,10 @@ html.dark .input-label {
 
 html.dark .input:disabled {
   background-color: #1a1a1a;
+}
+
+html.dark .image-preview {
+  border-color: #3a3a3a;
 }
 
 html.dark .response-block {
