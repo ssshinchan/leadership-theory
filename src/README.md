@@ -7,7 +7,7 @@ bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
 bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
 bgImageStyle:
   background-attachment: fixed
-heroText: 京都ゴミ先生
+heroText: 京都ゴミ分別先生
 tagline: 京都の留学生向けのごみ分別ウェブサイト
 actions:
   - text: スタート
@@ -38,7 +38,7 @@ highlights:
         details: データ収集
 
       - title: M25W7497 瀋普銘
-        details: ウェブサイトを開発する & データ可視化 & 英語翻訳
+        details: ウェブサイトを開発する & データ可視化 & 翻訳
 
       - title: M25W0222 宋首正
         details: データ収集

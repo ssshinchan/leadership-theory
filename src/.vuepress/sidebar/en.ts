@@ -4,7 +4,7 @@ export const enSidebar = sidebar({
   "/en/": [
     "",
     {
-      text: "Rubbish",
+      text: "Garbage Separation",
       icon: "laptop-code",
       prefix: "rubbish/",
       link: "rubbish/",

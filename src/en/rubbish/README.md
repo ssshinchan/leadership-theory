@@ -1,5 +1,5 @@
 ---
-title: Rubbish
+title: Garbage Separation
 icon: recycle
 index: false
 ---

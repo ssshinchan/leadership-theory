@@ -11,13 +11,18 @@ export default defineUserConfig({
   locales: {
     "/": {
       lang: "ja-JP",
-      title: "京都ゴミ先生",
+      title: "京都ゴミ分別先生",
       description: "京都の留学生向けのごみ分別ウェブサイト",
     },
     "/en/": {
       lang: "en-US",
-      title: "Kyoto Trash Teacher",
-      description: "A waste separation website for international students in Kyoto",
+      title: "Kyoto Garbage Separation Teacher",
+      description: "A garbage separation website for international students in Kyoto",
+    },
+    "/zh/": {
+      lang: "zh-CN",
+      title: "京都垃圾分类老师",
+      description: "为京都的留学生提供的垃圾分类网站",
     },
   },
 

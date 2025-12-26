@@ -281,7 +281,14 @@ const submitQuery = async () => {
   response.value = '';
 
   try {
-    const language = window.location.href.indexOf("/en/") >= 0 ? "英文" : "日文";
+    let language;
+    if(window.location.href.indexOf("/en/") >= 0){
+      language = "英文";
+    } else if(window.location.href.indexOf("/zh/") >= 0){
+      language = "中文";
+    } else {
+      language = "日文";
+    }
     const apiKey = 'sk-tlmIQC96RAuvzK6MOLRolEwthqASHWauUAAIaFe3MovKlvvJ';
     
     // 根据模式构建不同的prompt和消息内容

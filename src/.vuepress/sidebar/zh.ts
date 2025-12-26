@@ -1,10 +1,10 @@
 import { sidebar } from "vuepress-theme-hope";
 
-export const jpSidebar = sidebar({
-  "/": [
+export const zhSidebar = sidebar({
+  "/zh/": [
     "",
     {
-      text:"ゴミ分別",
+      text:"垃圾分类",
       icon: "laptop-code",
       prefix: "rubbish/",
       link: "rubbish/",

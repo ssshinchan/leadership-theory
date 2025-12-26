@@ -1,48 +1,49 @@
 ---
 home: true
 icon: house
-title: Home
+title: 首页
 heroImage: /assets/image/site-logo.png
 bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
 bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
 bgImageStyle:
   background-attachment: fixed
-heroText: Kyoto Garbage Separation Teacher
-tagline: A garbage separation website for international students in Kyoto
+heroText: 京都垃圾分类老师
+tagline: 面向京都留学生的垃圾分类网站
 actions:
-  - text: Start Now
+  - text: 开始
     icon: play
-    link: /en/rubbish/
+    link: /zh/rubbish/
     type: primary
 
 highlights:
-  - header: Group Members
-    description: Roles and responsibilities
+  - header: 小组成员
+    description: 角色与分工
     image: /assets/image/blog.svg
     bgImage: https://theme-hope-assets.vuejs.press/bg/4-light.svg
     bgImageDark: https://theme-hope-assets.vuejs.press/bg/4-dark.svg
     highlights:
       - title: M25W7315 張子涵
-        details: Create PPT & Present
+        details: 制作PPT & 发表
 
       - title: M25W7329 李宜航
-        details: Develop website & Conduct survey & Data analysis
+        details: 开发网站 & 进行问卷调查 & 数据分析
 
       - title: M25W7345 曹洺嘉
-        details: Data collection
+        details: 数据收集
 
       - title: M25W7359 許睿鴻
-        details: Data collection
+        details: 数据收集
 
       - title: M25W7374 羅嘉煒
-        details: Data collection
+        details: 数据收集
 
       - title: M25W7497 瀋普銘
-        details: Develop website & Data visualization & Translation
+        details: 开发网站 & 数据可视化 & 翻译
 
       - title: M25W0222 宋首正
-        details: Data collection
+        details: 数据收集
 
 copyright: false
-footer: All rights reserved © 2025-2025 Group 64
+footer: 版权所有 © 2025-2025 第64组
+
 ---

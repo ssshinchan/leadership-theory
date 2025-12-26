@@ -1,7 +1,7 @@
 import {hopeTheme} from "vuepress-theme-hope";
 
-import {enNavbar, jpNavbar} from "./navbar/index.js";
-import {jpSidebar, enSidebar} from "./sidebar/index.js";
+import {enNavbar, jpNavbar, zhNavbar} from "./navbar/index.js";
+import {jpSidebar, enSidebar, zhSidebar} from "./sidebar/index.js";
 
 export default hopeTheme({
   hostname: "https://group64.compile.ac.cn",
@@ -32,6 +32,15 @@ export default hopeTheme({
 
       // sidebar
       sidebar: enSidebar,
+
+      displayFooter: true,
+    },
+    "/zh/": {
+      // navbar
+      navbar: zhNavbar,
+
+      // sidebar
+      sidebar: zhSidebar,
 
       displayFooter: true,
     },

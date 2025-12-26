@@ -1,5 +1,5 @@
 ---
-title: ゴミ分別
+title: 垃圾分类
 icon: recycle
 index: false
 ---
