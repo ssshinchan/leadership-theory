@@ -2,6 +2,7 @@ import {hopeTheme} from "vuepress-theme-hope";
 
 import {enNavbar, jpNavbar, zhNavbar} from "./navbar/index.js";
 import {jpSidebar, enSidebar, zhSidebar} from "./sidebar/index.js";
+import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 
 export default hopeTheme({
   hostname: "https://group64.compile.ac.cn",
@@ -146,6 +147,17 @@ export default hopeTheme({
 
     icon: {
       prefix: "fa6-solid:",
+    },
+
+    slimsearch: true,
+
+    watermark: {
+      watermarkOptions: {
+        content: "Group 64",
+        movable: true,
+        // other options
+        
+      },
     },
 
     // Install @vuepress/plugin-pwa and uncomment these if you want a PWA
