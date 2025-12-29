@@ -1,7 +1,8 @@
 import {defineUserConfig} from "vuepress";
 
 import theme from "./theme.js";
-import { googleAnalyticsPlugin } from "@vuepress/plugin-google-analytics";
+import {googleAnalyticsPlugin} from "@vuepress/plugin-google-analytics";
+import {socialSharePlugin} from "vuepress-plugin-social-share";
 
 export default defineUserConfig({
   base: "/",
@@ -31,6 +32,9 @@ export default defineUserConfig({
   plugins: [
     googleAnalyticsPlugin({
       id: "G-9N4HBR2G9D",
+    }),
+    socialSharePlugin({
+      networks: ["wechat", "weibo", "qq", "x", "facebook", "linkedin", "qzone"],
     }),
   ],
 

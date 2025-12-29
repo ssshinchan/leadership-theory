@@ -2,7 +2,7 @@ import {hopeTheme} from "vuepress-theme-hope";
 
 import {enNavbar, jpNavbar, zhNavbar} from "./navbar/index.js";
 import {jpSidebar, enSidebar, zhSidebar} from "./sidebar/index.js";
-import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
+import {googleAnalyticsPlugin} from '@vuepress/plugin-google-analytics'
 
 export default hopeTheme({
   hostname: "https://group64.compile.ac.cn",
@@ -112,7 +112,7 @@ export default hopeTheme({
     // flowchart: true,
 
     // install mermaid before enabling it
-    // mermaid: true,
+    mermaid: true,
 
     // playground: {
     //   presets: ["ts", "vue"],
@@ -142,7 +142,19 @@ export default hopeTheme({
     },
 
     components: {
-      components: ["Badge", "VPCard"],
+      components: [
+        "ArtPlayer",
+        "Badge",
+        "BiliBili",
+        "CodePen",
+        "PDF",
+        "Share",
+        "SiteInfo",
+        "StackBlitz",
+        "VPBanner",
+        "VPCard",
+        "VidStack",
+      ],
     },
 
     icon: {
@@ -156,7 +168,7 @@ export default hopeTheme({
         content: "Group 64",
         movable: true,
         // other options
-        
+
       },
     },
 
