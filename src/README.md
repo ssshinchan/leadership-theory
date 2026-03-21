@@ -16,32 +16,41 @@ actions:
     type: primary
 
 highlights:
-  - header: グループメンバー
-    description: 役割りと機能
+  - header: コンテンツ一覧
+    description: ごみ分別に関する情報をご覧ください
     image: /assets/image/blog.svg
     bgImage: https://theme-hope-assets.vuejs.press/bg/4-light.svg
     bgImageDark: https://theme-hope-assets.vuejs.press/bg/4-dark.svg
     highlights:
-      - title: M25W7315 張子涵
-        details: PPTを作成する & 発表
+      - title: 分別大辞典
+        icon: book
+        details: 品目別にごみの分別区分と出し方を調べる
+        link: /rubbish/encyclopedia.html
 
-      - title: M25W7329 李宜航
-        details: ウェブサイトを開発する & アンケート調査を実施する & データ分析
+      - title: ゴミ袋使用規範
+        icon: bag-shopping
+        details: 京都市の指定ごみ袋の種類・サイズ・価格
+        link: /rubbish/bag-standard.html
 
-      - title: M25W7345 曹洺嘉
-        details: データ収集
+      - title: 廃棄物処理プロセス
+        icon: house-chimney-window
+        details: 収集から最終処分まで、京都市のごみ処理の全流れ
+        link: /rubbish/process.html
 
-      - title: M25W7359 許睿鴻
-        details: データ収集
+      - title: AIに分別を聞く
+        icon: robot
+        details: AIがごみの分別方法をリアルタイムで回答
+        link: /rubbish/ai.html
 
-      - title: M25W7374 羅嘉煒
-        details: データ収集
+      - title: アンケート調査の結果
+        icon: question
+        details: 留学生110人を対象としたごみ出し意識調査
+        link: /rubbish/questionnaire.html
 
-      - title: M25W7497 瀋普銘
-        details: ウェブサイトを開発する & データ可視化 & 翻訳
-
-      - title: M25W0222 宋首正
-        details: データ収集
+      - title: 公式情報まとめ
+        icon: link
+        details: 京都府・京都市の公式ごみ関連リンク集
+        link: /rubbish/reference.html
 
 copyright: false
 footer: 全著作権所有 © 2025-2025 グループ64

@@ -16,32 +16,41 @@ actions:
     type: primary
 
 highlights:
-  - header: Group Members
-    description: Roles and responsibilities
+  - header: Content Navigation
+    description: Browse garbage separation information
     image: /assets/image/blog.svg
     bgImage: https://theme-hope-assets.vuejs.press/bg/4-light.svg
     bgImageDark: https://theme-hope-assets.vuejs.press/bg/4-dark.svg
     highlights:
-      - title: M25W7315 張子涵
-        details: Create PPT & Present
+      - title: Separation Encyclopedia
+        icon: book
+        details: Look up disposal categories and instructions by item
+        link: /en/rubbish/encyclopedia.html
 
-      - title: M25W7329 李宜航
-        details: Develop website & Conduct survey & Data analysis
+      - title: Garbage Bag Standards
+        icon: bag-shopping
+        details: Types, sizes, and prices of designated garbage bags in Kyoto
+        link: /en/rubbish/bag-standard.html
 
-      - title: M25W7345 曹洺嘉
-        details: Data collection
+      - title: Waste Processing Flow
+        icon: house-chimney-window
+        details: Full process from collection to final disposal in Kyoto
+        link: /en/rubbish/process.html
 
-      - title: M25W7359 許睿鴻
-        details: Data collection
+      - title: Ask AI
+        icon: robot
+        details: Get real-time garbage sorting answers from AI
+        link: /en/rubbish/ai.html
 
-      - title: M25W7374 羅嘉煒
-        details: Data collection
+      - title: Survey Results
+        icon: question
+        details: Garbage disposal awareness survey of 110 international students
+        link: /en/rubbish/questionnaire.html
 
-      - title: M25W7497 瀋普銘
-        details: Develop website & Data visualization & Translation
-
-      - title: M25W0222 宋首正
-        details: Data collection
+      - title: Official References
+        icon: link
+        details: Official Kyoto Prefecture and Kyoto City garbage-related links
+        link: /en/rubbish/reference.html
 
 copyright: false
 footer: All rights reserved © 2025-2025 Group 64
